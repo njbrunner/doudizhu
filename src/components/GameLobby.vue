@@ -12,11 +12,16 @@
 
 <script setup lang="ts">
 import { signInAnonymously, onAuthStateChanged } from 'firebase/auth'
-import { auth, database } from '../firebaseConfig'
+import { auth, database } from '@/firebaseConfig'
 import { ref as dbRef, set, onDisconnect, onChildAdded, onValue } from 'firebase/database'
 import { ref } from 'vue'
 import { useUsernameStore } from '@/stores/username'
 import { storeToRefs } from 'pinia'
+
+interface Player {
+  name: string,
+  uid: string
+}
 
 let playerId
 let playerRef
@@ -36,7 +41,7 @@ signInAnonymously(auth)
     console.log(errorCode, errorMessage)
   })
 
-let players = ref({})
+let players = ref<Player[]>([])
 onValue(allPlayersRef, (snapshot) => {
   console.log('All Players value changed')
   players.value = snapshot.val()
