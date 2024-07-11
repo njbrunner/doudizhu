@@ -5,6 +5,5 @@
 </template>
 
 <script setup lang="ts">
-import MainLobby from '../components/MainLobby.vue';
-// import WelcomeHeader from '../components/WelcomeHeader.vue';
+import MainLobby from '@/components/MainLobby.vue'
 </script>
